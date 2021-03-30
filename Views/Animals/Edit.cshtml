@@ -1,0 +1,75 @@
+﻿@model AnimalChip.Models.Animal
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="card-header">
+
+    <div class="row">
+        <div class="col-md-12  margin-tb mt-4">
+            <div class="row justify-content-center" style="margin-bottom: 10px;">
+                <p>
+                    <h1 class="display-1">Edit Animal</h1>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="card-body">
+    <div class="container">
+        <div class="col-sm-8 offset-2">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Kind" class="control-label"></label>
+                    <input asp-for="Kind" class="form-control" />
+                    <span asp-validation-for="Kind" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Breed" class="control-label"></label>
+                    <input asp-for="Breed" class="form-control" />
+                    <span asp-validation-for="Breed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Chip" class="control-label"></label>
+                    <input asp-for="Chip" class="form-control" />
+                    <span asp-validation-for="Chip" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Contact" class="control-label"></label>
+                    <input asp-for="Contact" class="form-control" />
+                    <span asp-validation-for="Contact" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-success" />
+
+                    @if (User.IsInRole("Administrator"))
+                     {
+                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                     }
+                     else
+                     {
+                        <a asp-action="IndexYourAnimal" class="btn btn-secondary">Back to List</a>
+                     }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<AnimalChip.Models.Animal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@*<div class="mb-4 align-items-lg-center">
+    <h4>HOW MANY ANIMALS DO WE HAVE? @ViewBag.TotalRows !</h4>
+</div>*@
+<p>
+    <a class="btn btn-secondary" asp-action="Create">Create New</a>
+</p>
+
+@if (TempData["Message"] != null)
+{
+    <p class="text-success jumbotron">
+        @*@ViewBag.Message*@
+        @TempData["Message"]
+    </p>
+}
+<hr />
+<input class="form-control" type="text" id="search" placeholder="Enter value..." />
+<hr />
+
+<table class="table table-bordered table-dark">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Breed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kind)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Breed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td align="center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+<script>
+
+
+
+    $("#search").keyup(function () {
+        var value = this.value.toLowerCase().trim();
+
+        $("table tr").each(function (index) {
+            if (!index) return;
+            $(this).find("td").each(function () {
+                var id = $(this).text().toLowerCase().trim();
+                var not_found = (id.indexOf(value) == -1);
+                $(this).closest('tr').toggle(!not_found);
+                return not_found;
+            });
+        });
+    });
+
+
+</script>
+
+<h7 style="font-weight: bold">Time to load animals: </h7><h7>@ViewBag.TotalTime</h7>

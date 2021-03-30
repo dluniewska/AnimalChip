@@ -1,0 +1,21 @@
+﻿@page
+@model AnimalChip.Views.Home.AccessDeniedPathInfoModel
+@{
+}
+
+@{
+    ViewBag.Title = "Login Error";
+}
+
+<div class="jumbotron alert-danger mt-1 mb-1">
+    <h4>Couldn't log in with facebook, please try again</h4>
+    <hr />
+</div>
+@if (User.IsInRole("Administrator"))
+{
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+}
+else
+{
+    <a asp-action="IndexYourAnimal" class="btn btn-secondary">Back to List</a>
+}
